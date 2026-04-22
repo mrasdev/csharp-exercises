@@ -93,7 +93,7 @@ if (ushort.TryParse(input, out ushort ushortValue))
 Console.WriteLine($"Die Eingabe ist ein String: {input}");
 convertedValue.Add("string", input);
 
-while (true)
+while (true)   // loop until a valid key is chosen
 {
     string key;
     if (convertedValue.Count == 1)
@@ -108,7 +108,7 @@ while (true)
             Console.Write($"{item.Key} ");
         }
         Console.Write("\nBitte wählen Sie aus: ");
-        key = Console.ReadLine() ?? string.Empty;
+        key = Console.ReadLine() ?? string.Empty;   // avoid null reference exception
     }
     if (convertedValue.TryGetValue(key, out var value))
     {
