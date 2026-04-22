@@ -1,5 +1,7 @@
 ﻿// Enter a string and the program will try to convert it to all possible types. Then you can choose which type you want to see the value of.
 
+using System.Numerics;   // for BigInteger
+
 var convertedValue = new Dictionary<string, object>();
 
 Console.Write("Bitte geben Sie etwas ein: ");
@@ -89,6 +91,11 @@ if (ushort.TryParse(input, out ushort ushortValue))
 {
     Console.WriteLine($"Die Eingabe ist ein unsigned short Integer: {ushortValue}");
     convertedValue["ushort"] = ushortValue;
+}
+if (BigInteger.TryParse(input, out BigInteger bigIntegerValue))
+{
+    Console.WriteLine($"Die Eingabe ist eine BigInteger-Zahl: {bigIntegerValue}");
+    convertedValue["bigint"] = bigIntegerValue;
 }
 Console.WriteLine($"Die Eingabe ist ein String: {input}");
 convertedValue.Add("string", input);
