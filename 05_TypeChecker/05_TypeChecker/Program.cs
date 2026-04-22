@@ -95,13 +95,21 @@ convertedValue.Add("string", input);
 
 while (true)
 {
-    Console.Write("\nMögliche Eingaben sind: ");
-    foreach (var item in convertedValue)
+    string key;
+    if (convertedValue.Count == 1)
     {
-        Console.Write($"{item.Key} ");
+        key = convertedValue.Keys.First();
     }
-    Console.Write("\nBitte wählen Sie aus: ");
-    string key = Console.ReadLine() ?? string.Empty;
+    else
+    {
+        Console.Write("\nMögliche Eingaben sind: ");
+        foreach (var item in convertedValue)
+        {
+            Console.Write($"{item.Key} ");
+        }
+        Console.Write("\nBitte wählen Sie aus: ");
+        key = Console.ReadLine() ?? string.Empty;
+    }
     if (convertedValue.TryGetValue(key, out var value))
     {
         Console.WriteLine($"\nSie haben '{key}' mit dem Wert '{value}' gewählt.");
