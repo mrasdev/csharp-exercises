@@ -1,6 +1,6 @@
 ﻿// Simple Calculator in C#. Reads two operands and an operator from the user, performs the calculation, and displays the result.
 
-List<string> validOperators = [ "+", "-", "*", "/" ];
+List<string> validOperators = [ "+", "-", "*", "/", "%" ];
 
 Console.Write("Bitte geben Sie den linken Operanden ein: ");
 if (!double.TryParse(Console.ReadLine(), out double leftOperand))
@@ -15,7 +15,7 @@ if (!double.TryParse(Console.ReadLine(), out double rightOperand))
     return;
 }
 Console.Write("\nBitte geben Sie den Operator ein ({0}): ", string.Join(", ", validOperators));
-string myOperator = (Console.ReadLine() ?? String.Empty).Trim();
+string myOperator = (Console.ReadLine() ?? String.Empty).Trim();   // avoid null reference exception and trim whitespace
 if  (!validOperators.Contains(myOperator))
 {
     Console.WriteLine("Ungültiger Operator");
@@ -40,5 +40,13 @@ switch (myOperator)
             return;
         }
         Console.WriteLine($"{leftOperand} / {rightOperand} = {leftOperand / rightOperand}");
+        break;
+    case "%":
+        if (rightOperand == 0)
+        {
+            Console.WriteLine("Modulo Null ist nicht definiert.");
+            return;
+        }
+        Console.WriteLine($"{leftOperand} % {rightOperand} = {leftOperand % rightOperand}");
         break;
 }
