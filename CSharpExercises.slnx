@@ -2,5 +2,6 @@
   <Project Path="05_Alkomat/05_Alkomat/05_Alkomat.csproj" />
   <Project Path="05_Alkomat_Color/05_Alkomat_Color.csproj" Id="131bc19c-1460-4b1e-ab7d-19483eed1bc5" />
   <Project Path="05_DressCode/05_DressCode/05_DressCode.csproj" />
+  <Project Path="05_SimpleCalculator/05_SimpleCalculator.csproj" Id="29b74219-ea9b-460c-ba68-690affe96059" />
   <Project Path="05_TypeChecker/05_TypeChecker/05_TypeChecker.csproj" />
 </Solution>
