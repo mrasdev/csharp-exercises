@@ -4,5 +4,7 @@
   <Project Path="05_DressCode/05_DressCode/05_DressCode.csproj" />
   <Project Path="05_SimpleCalculator/05_SimpleCalculator.csproj" Id="29b74219-ea9b-460c-ba68-690affe96059" />
   <Project Path="05_TypeChecker/05_TypeChecker/05_TypeChecker.csproj" />
+  <Project Path="06_Calculator/06_Calculator.csproj" Id="edc63f5a-70cd-47a3-ae44-439539665bfc" />
   <Project Path="06_Loops/06_Loops.csproj" Id="ffb0c61e-7d54-4d51-9cbc-882c3f62eef9" />
+  <Project Path="PointerFun/PointerFun.csproj" Id="da492e35-2e67-4732-9a15-f4236f8c38c4" />
 </Solution>
