@@ -6,5 +6,8 @@
   <Project Path="05_TypeChecker/05_TypeChecker/05_TypeChecker.csproj" />
   <Project Path="06_Calculator/06_Calculator.csproj" Id="edc63f5a-70cd-47a3-ae44-439539665bfc" />
   <Project Path="06_Loops/06_Loops.csproj" Id="ffb0c61e-7d54-4d51-9cbc-882c3f62eef9" />
+  <Project Path="06_TaschenrechnerGruppe/06_TaschenrechnerGruppe.csproj" Id="018b0693-6c8f-40dc-9558-df04c755ab19" />
+  <Project Path="ArraysGruppe/ArraysGruppe.csproj" Id="8a03890f-b3cf-4307-b3c7-3b35e877d700" />
+  <Project Path="BubbleSort/BubbleSort.csproj" Id="1720ffe8-9d5a-4079-8bc2-52e20040f2bf" />
   <Project Path="PointerFun/PointerFun.csproj" Id="da492e35-2e67-4732-9a15-f4236f8c38c4" />
 </Solution>
