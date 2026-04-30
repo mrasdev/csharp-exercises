@@ -11,4 +11,5 @@
   <Project Path="10_BubbleSort/10_BubbleSort.csproj" Id="1720ffe8-9d5a-4079-8bc2-52e20040f2bf" />
   <Project Path="11_PointerFun/11_PointerFun.csproj" Id="da492e35-2e67-4732-9a15-f4236f8c38c4" />
   <Project Path="12_Lotto/12_Lotto.csproj" Id="f43dfe72-c0d7-4119-890e-ab76b9dae379" />
+  <Project Path="13_Zahlensysteme/13_Zahlensysteme.csproj" Id="bdd9566f-b356-472e-aaa0-62708b48daa7" />
 </Solution>
