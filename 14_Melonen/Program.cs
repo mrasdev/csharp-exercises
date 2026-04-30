@@ -70,8 +70,8 @@ namespace _14_Melonen
             Console.WriteLine($"inkl. {taxRate * 100:f0} % MwSt.   " + $"{taxInCurrency,20:c}");
             Console.WriteLine(new string('-', 39));
             DateTime dtNow = DateTime.Now;
-            string dayAndDate = dtNow.ToString("dddd", culture) + ", " + dtNow.ToShortDateString();
-            Console.WriteLine($"{dayAndDate,-29}{dtNow.ToShortTimeString(),10}");
+            string dayAndDate = dtNow.ToString("dddd", culture) + $", {dtNow:d}";
+            Console.WriteLine($"{dayAndDate,-29}{dtNow,10:t}");
         }
     }
 }
