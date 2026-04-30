@@ -13,4 +13,5 @@
   <Project Path="12_Lotto/12_Lotto.csproj" Id="f43dfe72-c0d7-4119-890e-ab76b9dae379" />
   <Project Path="13_Zahlensysteme/13_Zahlensysteme.csproj" Id="bdd9566f-b356-472e-aaa0-62708b48daa7" />
   <Project Path="14_Melonen/14_Melonen.csproj" Id="0c5cea0c-da38-4e15-9c86-893b0fc8c119" />
+  <Project Path="15_WarmKaltSpiel/15_WarmKaltSpiel.csproj" Id="744bc80a-3283-4e08-9dc3-dfde61bab6d5" />
 </Solution>
