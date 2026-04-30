@@ -1,5 +1,6 @@
-﻿using System.Globalization;
-using System.Net;
+﻿// Request melon price and quantity; generate a formatted console receipt. Supports locale testing.
+
+using System.Globalization;
 
 namespace _14_Melonen
 {
@@ -8,6 +9,12 @@ namespace _14_Melonen
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            var culture = new CultureInfo("de-DE");
+            //var culture = new CultureInfo("ru-RU");
+            //var culture = new CultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
 
             double costPerMelon;
             int numberMelons;
@@ -43,9 +50,9 @@ namespace _14_Melonen
             {
                 discountInPercent = (discountDay == DateTime.Now.DayOfWeek) ? 7 : 5;
             }
-            double discountInEuro = totalCost * (discountInPercent / 100.0);
-            double finalCost = totalCost - discountInEuro;
-            double taxInEuro = finalCost * taxRate;
+            double changeInCurrency = totalCost * (discountInPercent / -100.0);
+            double finalCost = totalCost + changeInCurrency;
+            double taxInCurrency = finalCost * taxRate;
             Console.WriteLine(new string('-', 39));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("🍉    MMM - Melonen Markt München    🍉");
@@ -57,14 +64,14 @@ namespace _14_Melonen
             Console.WriteLine("Zwischensumme:     " + $"{totalCost,20:c}");
             Console.WriteLine(new string('-', 39));
             Console.WriteLine("Rabattstufe:     " + $"{discountInPercent,20:f1} %");
-            Console.WriteLine("Preisminderung:       - " + $"{discountInEuro,15:c}");
+            Console.WriteLine("Preisänderung:     " + $"{changeInCurrency,20:c}");
             Console.WriteLine(new string('-', 39));
             Console.WriteLine("\u001b[1mEndpreis:          " + $"{finalCost,20:c}\u001b[0m");
-            Console.WriteLine($"inkl. {taxRate * 100:f0} % MwSt.   " + $"{taxInEuro,20:c}");
+            Console.WriteLine($"inkl. {taxRate * 100:f0} % MwSt.   " + $"{taxInCurrency,20:c}");
             Console.WriteLine(new string('-', 39));
             DateTime dtNow = DateTime.Now;
-            string dayAndDate = $"{dtNow:dddd}" + ", " + $"{dtNow:dd.MM.yyyy}";
-            Console.WriteLine($"{dayAndDate,-27}{dtNow.ToShortTimeString(),8} Uhr");
+            string dayAndDate = dtNow.ToString("dddd", culture) + ", " + dtNow.ToShortDateString();
+            Console.WriteLine($"{dayAndDate,-29}{dtNow.ToShortTimeString(),10}");
         }
     }
 }
