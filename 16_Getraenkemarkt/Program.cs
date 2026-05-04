@@ -79,17 +79,14 @@ namespace _16_Getraenkemarkt
         static void CalculateDiscount(ref PurchaseItem item)
         {
             item.DiscountPercent = GetDiscount(item.NumItems);
-            item.TotalPrice = item.NumItems * item.SinglePrice;
-            item.DiscountEuro = item.TotalPrice * item.DiscountPercent / 100.0;  // value > 0
-            item.FinalPrice = item.TotalPrice - item.DiscountEuro;
-        }
-
+            item.Update();
         static double GetDiscount(int quantity)
         {
             if (quantity >= 100) return 10.0;
             if (quantity >= 50) return 7.0;
             if (quantity >= 10) return 5.0;
             return 0.0;
+        }
         }
 
         static void PrintReceipt(List<PurchaseItem> purchasedItems)
@@ -136,8 +133,7 @@ namespace _16_Getraenkemarkt
         {
             Totals myTotals = new Totals();
             myTotals.SumEuro = purchasedItems.Sum(item => item.FinalPrice);
-            myTotals.TaxRate = 0.19;
-            myTotals.TaxEuro = myTotals.SumEuro * myTotals.TaxRate;
+            myTotals.CalcTax(/*taxRate*/0.19);
             totals = myTotals;
         }
 
@@ -160,8 +156,14 @@ namespace _16_Getraenkemarkt
             public double SinglePrice;
             public double TotalPrice;  // NumItems * SinglePrice
             public double DiscountPercent;
-            public double DiscountEuro; // TotalPrice * DiscountPercent / 100
-            public double FinalPrice;  // TotalPrice - DiscountEuro
+            public double DiscountEuro; 
+            public double FinalPrice;  
+            public void Update()
+            {
+                TotalPrice = NumItems * SinglePrice;
+                DiscountEuro = TotalPrice * DiscountPercent / 100.0;  // value > 0
+                FinalPrice = TotalPrice - DiscountEuro;
+            }
         }
 
         public struct Totals
@@ -169,6 +171,11 @@ namespace _16_Getraenkemarkt
             public double SumEuro;
             public double TaxRate;
             public double TaxEuro;
+            public void CalcTax(double taxRate)
+            {
+                TaxRate = taxRate;
+                TaxEuro = SumEuro * TaxRate;
+            }
         }
     }
 }
