@@ -31,7 +31,7 @@ namespace _16_Getraenkemarkt
         static void PrintHeader()
         {
             Console.Clear();
-            Console.WriteLine("Willkommen im Getränke Garten Gelsenkirchen");
+            Console.WriteLine("Willkommen im Kühlen Kasten Karlsruhe");
             Console.WriteLine("Bitte geben Sie Ihre Bestellung ein.");
             Console.WriteLine();
         }
@@ -94,7 +94,7 @@ namespace _16_Getraenkemarkt
 
         static void PrintReceipt(List<PurchaseItem> purchasedItems)
         {
-            const int lineWidth = 46;
+            const int lineWidth = 45;
             PrintReceiptHeader(lineWidth);
             PrintReceiptItems(purchasedItems, lineWidth);
             PrintReceiptTotal(purchasedItems, lineWidth);
@@ -107,7 +107,7 @@ namespace _16_Getraenkemarkt
             Console.Clear();
             Console.WriteLine(new string('-', lineWidth));
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("🍺  GGG - Getränke Garten Gelsenkirchen 04  🍺");
+            Console.WriteLine("🍺🍺    KKK - Kühler Kasten Karlsruhe    🍺🍺");
             Console.ResetColor();
             Console.WriteLine(new string('-', lineWidth));
         }
@@ -117,7 +117,7 @@ namespace _16_Getraenkemarkt
             foreach (PurchaseItem item in purchasedItems)
             {
                 Console.WriteLine(item.Description);
-                Console.WriteLine($"{item.NumItems,4} Stück à {item.SinglePrice,15:c} = {item.TotalPrice,15:c}");
+                Console.WriteLine($"{item.NumItems,4} Stück à {item.SinglePrice,14:c} = {item.TotalPrice,15:c}");
                 Console.Write($"Rabatt {item.DiscountPercent,4:f1} % {item.DiscountEuro,14:c}");
                 Console.WriteLine($"\u001b[1m{item.FinalPrice,18:c}\u001b[0m");
                 Console.WriteLine(new string('-', lineWidth));
@@ -127,8 +127,8 @@ namespace _16_Getraenkemarkt
         static void PrintReceiptTotal(List<PurchaseItem> purchasedItems, int lineWidth)
         {
             CalculateTotals(purchasedItems, out Totals totals);
-            Console.WriteLine("\u001b[1mEndpreis:          " + $"{totals.SumEuro,27:c}\u001b[0m");
-            Console.WriteLine($"inkl. {totals.TaxRate * 100:f0} % MwSt.   " + $"{totals.TaxEuro,27:c}");
+            Console.WriteLine("\u001b[1mEndpreis:          " + $"{totals.SumEuro,26:c}\u001b[0m");
+            Console.WriteLine($"inkl. {totals.TaxRate * 100:f0} % MwSt.   " + $"{totals.TaxEuro,26:c}");
             Console.WriteLine(new string('-', lineWidth));
         }
 
@@ -150,7 +150,7 @@ namespace _16_Getraenkemarkt
             CultureInfo.DefaultThreadCurrentUICulture = culture;
             DateTime dtNow = DateTime.Now;
             string dayAndDate = dtNow.ToString("dddd", culture) + $", {dtNow:d}";
-            Console.WriteLine($"{dayAndDate,-36}{dtNow,10:t}");
+            Console.WriteLine($"{dayAndDate,-35}{dtNow,10:t}");
         }
 
         public struct PurchaseItem
