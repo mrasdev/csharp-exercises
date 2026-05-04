@@ -50,31 +50,39 @@ namespace _16_Getraenkemarkt
             while (true)
             {
                 Console.Write(message + ": ");
-                if (typeof(T) == typeof(double))
+                if (!TryConvertValue<T>(Console.ReadLine(), out T? value))
                 {
-                    if (!double.TryParse(Console.ReadLine(), out double value) || value < 0)
-                    {
-                        Console.WriteLine("Falsche Eingabe!");
-                        continue;
-                    }
-                    return (T)(object)value;  // explicit cast to object then to T
+                    Console.WriteLine("Falsche Eingabe!");
+                    continue;
                 }
-                if (typeof(T) == typeof(int))
-                {
-                    if (!int.TryParse(Console.ReadLine(), out int value) || value < 0)
-                    {
-                        Console.WriteLine("Falsche Eingabe!");
-                        continue;
-                    }
-                    return (T)(object)value;  // explicit cast to object then to T
-                }
-                if (typeof(T) == typeof(string))
-                {
-                    string value = (Console.ReadLine() ?? "").Trim();
-                    return (T)(object)value;  // explicit cast to object then to T
-                }
-                throw new NotImplementedException();
+                return (T)(object)value!;
             }
+            throw new NotImplementedException();
+        }
+
+        static bool TryConvertValue<T>(string? userInput, out T? convertedValue)
+        {
+            // numbers must be >= 0 for returning success
+            userInput = (userInput ?? String.Empty).Trim();
+            if (typeof(T) == typeof(int))
+            {
+                bool success = int.TryParse(userInput, out int value) && value >= 0;
+                convertedValue = success ? (T)(object)value : default;
+                return success;
+            }
+            if (typeof(T) == typeof(double))
+            {
+                bool success = double.TryParse(userInput, out double value) && value >= 0;
+                convertedValue = success ? (T)(object)value : default;
+                return success;
+            }
+            if (typeof(T) == typeof(string))
+            {
+                convertedValue = (T)(object)userInput;
+                return true;
+            }
+            convertedValue = default;
+            return false;
         }
 
         static void CalculateDiscount(ref PurchaseItem item)
@@ -117,11 +125,11 @@ namespace _16_Getraenkemarkt
                 Console.WriteLine(item.Description);
                 Console.WriteLine($"{item.NumItems,4} Stück à {item.SinglePrice,14:c} = {item.TotalPrice,15:c}");
                 Console.Write($"Rabatt {item.DiscountPercent,4:f1} % {item.DiscountEuro,14:c}");
-                Console.WriteLine($"\u001b[1m{item.FinalPrice,18:c}\u001b[0m");
+                Console.WriteLine($"\u001b[1m{item.FinalPrice,17:c}\u001b[0m");
                 Console.WriteLine(new string('-', lineWidth));
             }
         }
-    
+
         static void PrintReceiptTotal(List<PurchaseItem> purchasedItems, int lineWidth)
         {
             CalculateTotals(purchasedItems, out Totals totals);
@@ -151,32 +159,32 @@ namespace _16_Getraenkemarkt
         }
 
         public struct PurchaseItem
+    {
+        public string Description;
+        public int NumItems;
+        public double SinglePrice;
+        public double TotalPrice;
+        public double DiscountPercent;
+        public double DiscountEuro;
+        public double FinalPrice;
+        public void Update()
         {
-            public string Description;
-            public int NumItems;
-            public double SinglePrice;
-            public double TotalPrice;  
-            public double DiscountPercent;
-            public double DiscountEuro; 
-            public double FinalPrice;  
-            public void Update()
-            {
-                TotalPrice = NumItems * SinglePrice;
-                DiscountEuro = TotalPrice * DiscountPercent / 100.0;  // value > 0
-                FinalPrice = TotalPrice - DiscountEuro;
-            }
-        }
-
-        public struct Totals
-        {
-            public double SumEuro;
-            public double TaxRate;
-            public double TaxEuro;
-            public void CalcTax(double taxRate)
-            {
-                TaxRate = taxRate;
-                TaxEuro = SumEuro * TaxRate;
-            }
+            TotalPrice = NumItems * SinglePrice;
+            DiscountEuro = TotalPrice * DiscountPercent / 100.0;  // value > 0
+            FinalPrice = TotalPrice - DiscountEuro;
         }
     }
+
+    public struct Totals
+    {
+        public double SumEuro;
+        public double TaxRate;
+        public double TaxEuro;
+        public void CalcTax(double taxRate)
+        {
+            TaxRate = taxRate;
+            TaxEuro = SumEuro * TaxRate;
+        }
+    }
+}
 }
