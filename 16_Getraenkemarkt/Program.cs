@@ -45,7 +45,7 @@ namespace _16_Getraenkemarkt
             return item;
         }
 
-        static dynamic ReadUserInput<T>(string message)
+        static T ReadUserInput<T>(string message)  // generic return value
         {
             while (true)
             {
@@ -57,7 +57,7 @@ namespace _16_Getraenkemarkt
                         Console.WriteLine("Falsche Eingabe!");
                         continue;
                     }
-                    return value;
+                    return (T)(object)value;  // explicit cast to object then to T
                 }
                 if (typeof(T) == typeof(int))
                 {
@@ -66,11 +66,12 @@ namespace _16_Getraenkemarkt
                         Console.WriteLine("Falsche Eingabe!");
                         continue;
                     }
-                    return value;
+                    return (T)(object)value;  // explicit cast to object then to T
                 }
                 if (typeof(T) == typeof(string))
                 {
-                    return (Console.ReadLine() ?? "").Trim();
+                    string value = (Console.ReadLine() ?? "").Trim();
+                    return (T)(object)value;  // explicit cast to object then to T
                 }
                 throw new NotImplementedException();
             }
@@ -80,13 +81,13 @@ namespace _16_Getraenkemarkt
         {
             item.DiscountPercent = GetDiscount(item.NumItems);
             item.Update();
-        static double GetDiscount(int quantity)
-        {
-            if (quantity >= 100) return 10.0;
-            if (quantity >= 50) return 7.0;
-            if (quantity >= 10) return 5.0;
-            return 0.0;
-        }
+            static double GetDiscount(int quantity)
+            {
+                if (quantity >= 100) return 10.0;
+                if (quantity >= 50) return 7.0;
+                if (quantity >= 10) return 5.0;
+                return 0.0;
+            }
         }
 
         static void PrintReceipt(List<PurchaseItem> purchasedItems)
@@ -120,7 +121,7 @@ namespace _16_Getraenkemarkt
                 Console.WriteLine(new string('-', lineWidth));
             }
         }
-
+    
         static void PrintReceiptTotal(List<PurchaseItem> purchasedItems, int lineWidth)
         {
             CalculateTotals(purchasedItems, out Totals totals);
@@ -154,7 +155,7 @@ namespace _16_Getraenkemarkt
             public string Description;
             public int NumItems;
             public double SinglePrice;
-            public double TotalPrice;  // NumItems * SinglePrice
+            public double TotalPrice;  
             public double DiscountPercent;
             public double DiscountEuro; 
             public double FinalPrice;  
