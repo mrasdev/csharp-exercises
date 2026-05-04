@@ -33,12 +33,12 @@ namespace _16_Getraenkemarkt
             Console.Clear();
             Console.WriteLine("Willkommen im Kühlen Kasten Karlsruhe");
             Console.WriteLine("Bitte geben Sie Ihre Bestellung ein.");
-            Console.WriteLine();
         }
 
         static PurchaseItem ShopAnItem()
         {
             PurchaseItem item = new();
+            Console.WriteLine();
             item.Description = ReadUserInput<string>("Bitte geben Sie die Artikelbeschreibung ein");
             item.NumItems = ReadUserInput<int>("Bitte geben Sie die Anzahl ein");
             item.SinglePrice = ReadUserInput<double>("Bitte geben Sie den Einzelpreis ein");
