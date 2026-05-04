@@ -59,7 +59,7 @@ namespace _16_Getraenkemarkt
                     }
                     return value;
                 }
-                else if (typeof(T) == typeof(int))
+                if (typeof(T) == typeof(int))
                 {
                     if (!int.TryParse(Console.ReadLine(), out int value) || value < 0)
                     {
@@ -68,38 +68,28 @@ namespace _16_Getraenkemarkt
                     }
                     return value;
                 }
-                else if (typeof(T) == typeof(string))
+                if (typeof(T) == typeof(string))
                 {
                     return (Console.ReadLine() ?? "").Trim();
                 }
-                else
-                {
-                    throw new NotImplementedException();
-                }
+                throw new NotImplementedException();
             }
         }
 
         static void CalculateDiscount(ref PurchaseItem item)
         {
-            if (item.NumItems >= 100)
-            {
-                item.DiscountPercent = 10.0;
-            }
-            else if (item.NumItems >= 50)
-            {
-                item.DiscountPercent = 7.0;
-            }
-            else if (item.NumItems >= 10)
-            {
-                item.DiscountPercent = 5.0;
-            }
-            else
-            {
-                item.DiscountPercent = 0.0;
-            }
+            item.DiscountPercent = GetDiscount(item.NumItems);
             item.TotalPrice = item.NumItems * item.SinglePrice;
             item.DiscountEuro = item.TotalPrice * item.DiscountPercent / 100.0;  // value > 0
             item.FinalPrice = item.TotalPrice - item.DiscountEuro;
+        }
+
+        static double GetDiscount(int quantity)
+        {
+            if (quantity >= 100) return 10.0;
+            if (quantity >= 50) return 7.0;
+            if (quantity >= 10) return 5.0;
+            return 0.0;
         }
 
         static void PrintReceipt(List<PurchaseItem> purchasedItems)
