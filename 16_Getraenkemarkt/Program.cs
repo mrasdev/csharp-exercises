@@ -17,15 +17,14 @@ namespace _16_Getraenkemarkt
         static void DoShopping(List<PurchaseItem> purchasedItems)
         {
             PrintHeader();
-            bool loopAgain;
-            do
+            while (true)
             {
                 PurchaseItem purchasedItem = ShopAnItem();
                 CalculateDiscount(ref purchasedItem);
                 purchasedItems.Add(purchasedItem);
                 string userInput = ReadUserInput<string>("Einen weiteren Artikel erfassen? (j/n)");
-                loopAgain = userInput.Equals("j", StringComparison.OrdinalIgnoreCase);
-            } while (loopAgain);
+                if (!userInput.Equals("j", StringComparison.OrdinalIgnoreCase)) return;
+            } 
         }
 
         static void PrintHeader()
