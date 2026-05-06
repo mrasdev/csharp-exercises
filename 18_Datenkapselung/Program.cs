@@ -5,7 +5,14 @@
         static void Main(string[] args)
         {
             //TestePerson();
-            TesteKonto();
+            //TesteKonto();
+            TesteRechteck();
+        }
+
+        private static void TesteRechteck()
+        {
+            Square square = new Square { Width = 120, Height = 2 };
+            Console.WriteLine($"Die Fläche beträgt {square.GetArea()}.");
         }
 
         private static void TesteKonto()
