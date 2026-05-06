@@ -15,4 +15,5 @@
   <Project Path="14_Melonen/14_Melonen.csproj" Id="0c5cea0c-da38-4e15-9c86-893b0fc8c119" />
   <Project Path="15_WarmKaltSpiel/15_WarmKaltSpiel.csproj" Id="744bc80a-3283-4e08-9dc3-dfde61bab6d5" />
   <Project Path="16_Getraenkemarkt/16_Getraenkemarkt.csproj" Id="05475100-4282-40cf-902b-5c444c5918f8" />
+  <Project Path="18_Datenkapselung/18_Datenkapselung.csproj" Id="7301d91c-77e3-472d-92e4-4a984ac09e76" />
 </Solution>
