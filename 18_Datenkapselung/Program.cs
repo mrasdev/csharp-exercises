@@ -4,7 +4,22 @@
     {
         static void Main(string[] args)
         {
-            TestePerson();
+            //TestePerson();
+            TesteKonto();
+        }
+
+        private static void TesteKonto()
+        {
+            Konto konto = new Konto("0815");
+            konto.SaldoAnzeigen();
+            konto.Einzahlen(100);
+            konto.SaldoAnzeigen();
+            konto.Auszahlen(200);
+            konto.Auszahlen(100);
+            konto.Einzahlen(2000);
+            konto.Auszahlen(1100);
+            konto.SaldoAnzeigen();
+
         }
 
         private static void TestePerson()
