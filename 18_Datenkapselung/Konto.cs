@@ -11,7 +11,7 @@ internal class Konto
         Console.OutputEncoding = System.Text.Encoding.UTF8;  // for currency output on console
     }
 
-    public Konto(string kontonummer):this() 
+    public Konto(string kontonummer) : this()
     {
         _kontonummer = kontonummer;
         Console.WriteLine($"Ein Konto mit der Nummer {_kontonummer} wurde erstellt.");
@@ -25,12 +25,12 @@ internal class Konto
 
     public void Auszahlen(double betrag)
     {
-        if ( betrag > _maxAuszahlen)
+        if (betrag > _maxAuszahlen)
         {
             Console.WriteLine($"Der maximale Auszahlungsbetrag von {_maxAuszahlen:c} wurde überschritten.");
             return;
         }
-        if ( betrag > _saldo)
+        if (betrag > _saldo)
         {
             Console.WriteLine($"Eine Auszahlung von {betrag:c} ist nicht möglich, der Kontostand ist {_saldo:c}.");
             return;
