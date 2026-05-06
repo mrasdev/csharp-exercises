@@ -10,15 +10,22 @@
 
         private static void TesteKonto()
         {
-            Konto konto = new Konto("0815");
-            konto.SaldoAnzeigen();
-            konto.Einzahlen(100);
-            konto.SaldoAnzeigen();
-            konto.Auszahlen(200);
-            konto.Auszahlen(100);
-            konto.Einzahlen(2000);
-            konto.Auszahlen(1100);
-            konto.SaldoAnzeigen();
+            Konto konto1 = new Konto("0815");
+            konto1.SaldoAnzeigen();
+            konto1.Einzahlen(100);
+            konto1.SaldoAnzeigen();
+            konto1.Auszahlen(200);
+            konto1.Auszahlen(100);
+            konto1.Einzahlen(2000);
+            konto1.Auszahlen(1100);
+            konto1.SaldoAnzeigen();
+            Konto konto2 = new Konto("2222");
+            konto1.ZinssatzAnzeigen();
+            konto2.ZinssatzAnzeigen();
+            Console.WriteLine("Ändere Zinssatz von Konto 0815");
+            konto1.ZinssatzSetzen(0.03);
+            konto1.ZinssatzAnzeigen();
+            konto2.ZinssatzAnzeigen();
 
         }
 

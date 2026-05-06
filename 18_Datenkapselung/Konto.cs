@@ -4,6 +4,7 @@ internal class Konto
 {
     string _kontonummer;
     double _saldo;
+    static double _zinssatz = 0.04;
     const double _maxAuszahlen = 1000.0;
 
     public Konto()
@@ -41,5 +42,15 @@ internal class Konto
     public void SaldoAnzeigen()
     {
         Console.WriteLine($"Ihr Konto hat den aktuellen Stand {_saldo:c}.");
+    }
+
+    public void ZinssatzSetzen(double zinssatz)
+    {
+        _zinssatz = zinssatz;
+    }
+
+    public void ZinssatzAnzeigen()
+    {
+        Console.WriteLine($"Konto {_kontonummer}: Zinssatz = {_zinssatz:p2}");
     }
 }
