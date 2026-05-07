@@ -1,6 +1,6 @@
 ﻿// Build a square which cannot be changed after being constructed. The square can tell its area.
 
-namespace _18_Datenkapselung;
+namespace _18_Datenkapselung.Models;
 
 internal class Square
 {

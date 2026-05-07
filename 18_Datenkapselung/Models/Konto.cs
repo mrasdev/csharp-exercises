@@ -1,4 +1,4 @@
-﻿namespace _18_Datenkapselung;
+﻿namespace _18_Datenkapselung.Models;
 
 internal class Konto
 {

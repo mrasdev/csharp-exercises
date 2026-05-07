@@ -1,12 +1,14 @@
-﻿namespace _18_Datenkapselung
+﻿using _18_Datenkapselung.Models;
+
+namespace _18_Datenkapselung
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             //TestePerson();
-            //TesteKonto();
-            TesteRechteck();
+            TesteKonto();
+            //TesteRechteck();
         }
 
         private static void TesteRechteck()
