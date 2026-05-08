@@ -6,15 +6,15 @@ namespace _19_TemperaturStatistik
     {
         static void Main(string[] args)
         {
-            Random rnd = new Random();
             TemperaturStatistik temperaturStatistik = new TemperaturStatistik();
-            //temperaturStatistik.NeueMessungErfassen(5);
-            //temperaturStatistik.NeueMessungErfassen(6);
-            //temperaturStatistik.NeueMessungErfassen(7);
+            Random rnd = new Random();
             for (int i = 0; i < 100; i++)
             {
                 temperaturStatistik.NeueMessungErfassen(rnd.NextDouble() * 100.0);
             }
+            //temperaturStatistik.NeueMessungErfassen(5);
+            //temperaturStatistik.NeueMessungErfassen(6);
+            //temperaturStatistik.NeueMessungErfassen(7);
             // ConsoleWriteLineAusprobiererle(temperaturStatistik);
             Console.WriteLine($"Durschnitt = {temperaturStatistik.Durchschnitt():f2} °C");  // = 6
             Console.WriteLine($"Maximum = {temperaturStatistik.Maximalwert():f2} °C");  // = 7
