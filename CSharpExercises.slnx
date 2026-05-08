@@ -16,4 +16,6 @@
   <Project Path="15_WarmKaltSpiel/15_WarmKaltSpiel.csproj" Id="744bc80a-3283-4e08-9dc3-dfde61bab6d5" />
   <Project Path="16_Getraenkemarkt/16_Getraenkemarkt.csproj" Id="05475100-4282-40cf-902b-5c444c5918f8" />
   <Project Path="18_Datenkapselung/18_Datenkapselung.csproj" Id="7301d91c-77e3-472d-92e4-4a984ac09e76" />
+  <Project Path="19_TemperaturStatistik/19_TemperaturStatistik.csproj" Id="7e2597aa-2166-4de9-94d0-184c13c8a410" />
+  <Project Path="20_Rechner_OOP/20_Rechner_OOP.csproj" Id="c342aeb0-25c4-4dff-9992-05a5dab6ca64" />
 </Solution>
