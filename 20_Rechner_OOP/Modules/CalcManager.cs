@@ -6,14 +6,13 @@ internal class CalcManager
     public record CalculationRecord(
         DateTime Timestamp,
         bool Success,
-        Calculator Calculation
+        string Summary
         );
 
     // Properties
     public List<CalculationRecord> Calculations { get; private set; } = [];
     public Operation Operator { get; set; }
     public bool Enabled { get; private set; } = true;  // to stop an external loop
-    public DateTime Timestamp { get; private set; }
 
     // Public methods
     public void SetOperation()
@@ -48,7 +47,7 @@ internal class CalcManager
         }
         foreach (CalculationRecord rec in Calculations)
         {
-            Console.WriteLine($"{rec.Timestamp:T}  {(rec.Success ? "✓" : "✕")}   {rec.Calculation.GetSummary()}");
+            Console.WriteLine($"{rec.Timestamp:T}  {(rec.Success ? "✓" : "✕")}   {rec.Summary}");
         }
         Console.WriteLine();
     }
@@ -71,12 +70,19 @@ internal class CalcManager
     }
 
     // Private methods
+    private static void QueryOperands(Calculator calc)
+    {
+        calc.Operand1 = Calculator.QueryDoubleValue("Bitte geben Sie den ersten Operanden ein");
+        calc.Operand2 = Calculator.QueryDoubleValue("Bitte geben Sie den zweiten Operanden ein");
+    }
+
     private void MathOperate()
     {
         Calculator calc = new() { Operator = Operator };
-        calc.QueryOperands();
+        QueryOperands(calc);
         bool success = calc.Operate();
-        CalculationRecord rec = new(DateTime.Now, success, calc);
+        string summary = calc.GetSummary();
+        CalculationRecord rec = new(DateTime.Now, success, summary);
         Calculations.Add(rec); 
         Console.WriteLine();
         if (success) Console.WriteLine($"Das Ergebnis ist {calc.Result:f2}");

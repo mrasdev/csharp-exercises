@@ -1,5 +1,4 @@
 ﻿// Console calculator with basic mathematical functions
-using System.Diagnostics.CodeAnalysis;
 
 namespace _20_Rechner_OOP.Modules;
 
@@ -26,19 +25,13 @@ internal class Calculator
         }
     }
 
-    public void QueryOperands()
-    {
-        Operand1 = QueryDoubleValue("Bitte geben Sie den ersten Operanden ein");
-        Operand2 = QueryDoubleValue("Bitte geben Sie den zweiten Operanden ein");
-    }
-
     public bool Operate()  // returns true if operation was successful
     {
         if (Operator.IsMathOp())
         {
             return MathOperate();
         }
-        Console.WriteLine($"\nFEHLER: Unbekannter Operator: {Operator}");
+        Console.WriteLine($"\nFEHLER: Unbekannter Operator: {Operator}");  // here we don't want to throw
         return false;
     }
 
@@ -64,7 +57,7 @@ internal class Calculator
                 Result = Operand1 * Operand2;
                 return true;
             case Operation.Divide:
-                Result = Operand1 / Operand2;
+                Result = Operand1 / Operand2;  // possible div by zero on purpose
                 if (Operand2 == 0)
                 {
                     Console.WriteLine("\nWARNUNG: Division durch Null!");
@@ -72,7 +65,7 @@ internal class Calculator
                 }
                 return true;
             case Operation.Modulo:
-                Result = Operand1 % Operand2;
+                Result = Operand1 % Operand2;  // possible div by zero on purpose
                 if (Operand2 == 0)
                 {
                     Console.WriteLine("\nWARNUNG: Modulo durch Null!");

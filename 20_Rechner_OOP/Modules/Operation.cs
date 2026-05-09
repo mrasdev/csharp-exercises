@@ -1,4 +1,5 @@
 ﻿// Provide an enum with basic mathematical operations and helper functions to get their sign and description.
+
 namespace _20_Rechner_OOP.Modules;
 
 public enum Operation
