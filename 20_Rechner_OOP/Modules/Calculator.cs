@@ -7,7 +7,6 @@ internal class Calculator
     public double Operand2 { get; set; }
     public Operation Operator { get; set; }
     public double Result { get; private set; }
-    public bool Success { get; private set; } = true;
 
     // Public methods
     public void QueryOperands()
@@ -16,65 +15,54 @@ internal class Calculator
         Operand2 = QueryDoubleValue("Bitte geben Sie den zweiten Operanden ein");
     }
 
-    public void Operate()
+    public bool Operate()  // returns true if operation was successful
     {
         if (Operator.IsMathOp())
         {
-            MathOperate();
-            return;
+            return MathOperate();
         }
-        Success = false;
         Console.WriteLine($"\nFEHLER: Unbekannter Operator: {Operator}");
+        return false;
     }
 
-    public void MathOperate()
+    public bool MathOperate()  // returns true if operation was successful
     {
-        Success = true;
         QueryOperands();
         switch (Operator)
         {
             case Operation.Add:
                 Result = Operand1 + Operand2;
-                return;
+                return true;
             case Operation.Subtract:
                 Result = Operand1 - Operand2;
-                return;
+                return true;
             case Operation.Multiply:
                 Result = Operand1 * Operand2;
-                return;
+                return true;
             case Operation.Divide:
                 Result = Operand1 / Operand2;
                 if (Operand2 == 0)
                 {
                     Console.WriteLine("\nWARNUNG: Division durch Null!");
-                    Success = false;
+                    return false;
                 }
-                return;
+                return true;
             case Operation.Modulo:
                 Result = Operand1 % Operand2;
                 if (Operand2 == 0)
                 {
                     Console.WriteLine("\nWARNUNG: Modulo durch Null!");
-                    Success = false;
+                    return false;
                 }
-                return;
+                return true;
             default:
                 throw new NotImplementedException();
         }
     }
 
-    public void ShowResult()
-    {
-        if (Operator == Operation.Quit || Operator == Operation.History) return;
-        Console.WriteLine();
-        if (Success) Console.WriteLine($"Das Ergebnis ist {Result:f2}");
-        Console.WriteLine($"Die Operation war {(Success ? "" : "nicht ")}erfolgreich");
-        Console.WriteLine();
-    }
-
     public string GetSummary()
     {
-        string summary = $"{(Success ? "✓" : "✕")}   {Operand1} {Operator.GetSign()} {Operand2} = {Result}";
+        string summary = $"{Operand1} {Operator.GetSign()} {Operand2} = {Result}";
         return summary;
     }
 

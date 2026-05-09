@@ -16,12 +16,14 @@ public static class EnumExtensions
 {
     public static string GetDescription(this Operation value) => value switch
     {
+        Operation.Quit => "Programm verlassen",
         Operation.Add => "Addieren (+)",
         Operation.Subtract => "Subtrahieren (-)",
         Operation.Multiply => "Multiplizieren (*)",
         Operation.Divide => "Dividieren (/)",
         Operation.Modulo => "Modulo (%)",
-        _ => "Unbekannte Operation (?)"
+        Operation.History => "Verlauf anzeigen",
+        _ => throw new NotImplementedException()
     };
 
     public static string GetSign(this Operation value) => value switch

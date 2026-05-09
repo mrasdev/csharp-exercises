@@ -5,13 +5,14 @@ internal class CalcManager
     // Nested types
     public record CalculationRecord(
         DateTime Timestamp,
+        bool Success,
         Calculator Calculation
         );
 
     // Properties
     public List<CalculationRecord> Calculations { get; private set; } = [];
     public Operation Operator { get; set; }
-    public bool Enabled { get; private set; } = true;
+    public bool Enabled { get; private set; } = true;  // to stop an external loop
     public DateTime Timestamp { get; private set; }
 
     // Public methods
@@ -47,7 +48,7 @@ internal class CalcManager
         }
         foreach (CalculationRecord rec in Calculations)
         {
-            Console.WriteLine($"{rec.Timestamp:T}  {rec.Calculation.GetSummary()}");
+            Console.WriteLine($"{rec.Timestamp:T}  {(rec.Success ? "✓" : "✕")}   {rec.Calculation.GetSummary()}");
         }
         Console.WriteLine();
     }
@@ -64,12 +65,21 @@ internal class CalcManager
                 ShowCalculations();
                 return;
             default:
-                Calculator calc = new() { Operator = Operator };
-                calc.Operate();
-                calc.ShowResult();
-                CalculationRecord rec = new(DateTime.Now, calc);
-                Calculations.Add(rec);
+                MathOperate();
                 return;
         }
+    }
+
+    // Private methods
+    private void MathOperate()
+    {
+        Calculator calc = new() { Operator = Operator };
+        bool success = calc.Operate();
+        CalculationRecord rec = new(DateTime.Now, success, calc);
+        Calculations.Add(rec); 
+        Console.WriteLine();
+        if (success) Console.WriteLine($"Das Ergebnis ist {calc.Result:f2}");
+        Console.WriteLine($"Die Operation war {(success ? "" : "nicht ")}erfolgreich");
+        Console.WriteLine();
     }
 }
