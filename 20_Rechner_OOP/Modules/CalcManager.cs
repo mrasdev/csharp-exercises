@@ -74,6 +74,7 @@ internal class CalcManager
     private void MathOperate()
     {
         Calculator calc = new() { Operator = Operator };
+        calc.QueryOperands();
         bool success = calc.Operate();
         CalculationRecord rec = new(DateTime.Now, success, calc);
         Calculations.Add(rec); 

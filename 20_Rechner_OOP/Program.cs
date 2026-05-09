@@ -9,7 +9,6 @@ internal class Program
         Console.OutputEncoding = System.Text.Encoding.UTF8;  // for \inf output on console
 
         CalcManager calcman = new();
-
         do
         {
             calcman.SetOperation();

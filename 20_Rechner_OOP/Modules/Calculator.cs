@@ -1,14 +1,31 @@
-﻿namespace _20_Rechner_OOP.Modules;
+﻿// Console calculator with basic mathematical functions
+using System.Diagnostics.CodeAnalysis;
+
+namespace _20_Rechner_OOP.Modules;
 
 internal class Calculator
 {
     // Properties
-    public double Operand1 { get; set; }
-    public double Operand2 { get; set; }
-    public Operation Operator { get; set; }
+    public double Operand1 { get; set; }  
+    public double Operand2 { get; set; } 
+    public Operation Operator { get; set; } 
     public double Result { get; private set; }
 
     // Public methods
+    public static double QueryDoubleValue(string message)
+    {
+        while (true)
+        {
+            Console.Write($"{message}: ");
+            if (!double.TryParse(Console.ReadLine(), out double value))
+            {
+                Console.WriteLine("FEHLER: Falsche Eingabe!");
+                continue;
+            }
+            return value;
+        }
+    }
+
     public void QueryOperands()
     {
         Operand1 = QueryDoubleValue("Bitte geben Sie den ersten Operanden ein");
@@ -25,9 +42,16 @@ internal class Calculator
         return false;
     }
 
-    public bool MathOperate()  // returns true if operation was successful
+    public string GetSummary()
     {
-        QueryOperands();
+        string summary = $"{Operand1} {Operator.GetSign()} {Operand2} = {Result}";
+        return summary;
+    }
+
+    // Private methods
+
+    private bool MathOperate()  // returns true if operation was successful
+    {
         switch (Operator)
         {
             case Operation.Add:
@@ -57,27 +81,6 @@ internal class Calculator
                 return true;
             default:
                 throw new NotImplementedException();
-        }
-    }
-
-    public string GetSummary()
-    {
-        string summary = $"{Operand1} {Operator.GetSign()} {Operand2} = {Result}";
-        return summary;
-    }
-
-    // Helper Methods
-    static double QueryDoubleValue(string message)
-    {
-        while (true)
-        {
-            Console.Write($"{message}: ");
-            if (!double.TryParse(Console.ReadLine(), out double value))
-            {
-                Console.WriteLine("FEHLER: Falsche Eingabe!");
-                continue;
-            }
-            return value;
         }
     }
 }
