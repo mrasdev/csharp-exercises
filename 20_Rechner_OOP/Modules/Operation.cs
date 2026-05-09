@@ -1,43 +1,30 @@
-﻿using System.ComponentModel;
-using System.Reflection;
-
+﻿// Provide an enum with basic mathematical operations and helper functions to get their sign and description.
 namespace _20_Rechner_OOP.Modules;
 
 public enum Operation
 {
-    [Description("Programm verlassen")]
     Quit,
-
-    [Description("Addition (+)")]
     Add,
-
-    [Description("Subtraktion (-)")]
     Subtract,
-
-    [Description("Multiplikation (*)")]
     Multiply,
-
-    [Description("Division (/)")]
     Divide,
-
-    [Description("Modulo (%)")]
     Modulo,
-
-    [Description("Historie anzeigen")]
     History,
 }
 
 public static class EnumExtensions
 {
-    public static string GetDescription(this Enum value)
+    public static string GetDescription(this Operation value) => value switch
     {
-        FieldInfo fi = value.GetType().GetField(value.ToString());
-        if (fi == null) return "";
-        DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-        return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
-    }
+        Operation.Add => "Addieren (+)",
+        Operation.Subtract => "Subtrahieren (-)",
+        Operation.Multiply => "Multiplizieren (*)",
+        Operation.Divide => "Dividieren (/)",
+        Operation.Modulo => "Modulo (%)",
+        _ => "Unbekannte Operation (?)"
+    };
 
-    public static string GetSign(this Enum value) => value switch
+    public static string GetSign(this Operation value) => value switch
     {
         Operation.Add => "+",
         Operation.Subtract => "-",
@@ -47,4 +34,6 @@ public static class EnumExtensions
         _ => "?"
     };
 
+    public static bool IsMathOp(this Operation value)
+        => value != Operation.Quit && value != Operation.History;
 }

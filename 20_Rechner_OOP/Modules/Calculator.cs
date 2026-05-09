@@ -16,26 +16,33 @@ internal class Calculator
         Operand2 = QueryDoubleValue("Bitte geben Sie den zweiten Operanden ein");
     }
 
-
     public void Operate()
     {
+        if (Operator.IsMathOp())
+        {
+            MathOperate();
+            return;
+        }
+        Success = false;
+        Console.WriteLine($"\nFEHLER: Unbekannter Operator: {Operator}");
+    }
+
+    public void MathOperate()
+    {
         Success = true;
+        QueryOperands();
         switch (Operator)
         {
             case Operation.Add:
-                QueryOperands();
                 Result = Operand1 + Operand2;
                 return;
             case Operation.Subtract:
-                QueryOperands();
                 Result = Operand1 - Operand2;
                 return;
             case Operation.Multiply:
-                QueryOperands();
                 Result = Operand1 * Operand2;
                 return;
             case Operation.Divide:
-                QueryOperands();
                 Result = Operand1 / Operand2;
                 if (Operand2 == 0)
                 {
@@ -44,7 +51,6 @@ internal class Calculator
                 }
                 return;
             case Operation.Modulo:
-                QueryOperands();
                 Result = Operand1 % Operand2;
                 if (Operand2 == 0)
                 {
@@ -53,9 +59,7 @@ internal class Calculator
                 }
                 return;
             default:
-                Console.WriteLine($"\nFEHLER: Unbekannter Operator: {Operator}");
-                Success = false;
-                return;
+                throw new NotImplementedException();
         }
     }
 
